@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import emailjs from "emailjs-com";
+
 import {
   faInstagram,
   faLinkedin,
@@ -20,19 +21,42 @@ function App() {
 
   // Handle random ghost movement
   useEffect(() => {
-    let ghostTimer;
+    let animationFrameId;
+    let velocity = { x: 1.5, y: 1.2 }; // Adjust velocity for smooth speed
+  
+    const moveGhost = () => {
+      setGhostPosition((prevPosition) => {
+        let newX = prevPosition.x + velocity.x;
+        let newY = prevPosition.y + velocity.y;
+  
+        // Reverse direction if hitting horizontal borders
+        if (newX <= 0 || newX >= window.innerWidth - 100) {
+          velocity.x = -velocity.x;
+          newX = Math.max(0, Math.min(newX, window.innerWidth - 100)); // Clamp to boundaries
+        }
+  
+        // Reverse direction if hitting vertical borders
+        if (newY <= 0 || newY >= window.innerHeight - 100) {
+          velocity.y = -velocity.y;
+          newY = Math.max(0, Math.min(newY, window.innerHeight - 100)); // Clamp to boundaries
+        }
+  
+        return { x: newX, y: newY };
+      });
+  
+      animationFrameId = requestAnimationFrame(moveGhost);
+    };
+  
     if (isGhostFree) {
-      ghostTimer = setInterval(() => {
-        setGhostPosition({
-          x: Math.random() * (window.innerWidth - 100),
-          y: Math.random() * (window.innerHeight - 100),
-        });
-      }, 1500);
+      animationFrameId = requestAnimationFrame(moveGhost);
     } else {
-      clearInterval(ghostTimer);
+      cancelAnimationFrame(animationFrameId);
     }
-    return () => clearInterval(ghostTimer);
+  
+    return () => cancelAnimationFrame(animationFrameId);
   }, [isGhostFree]);
+  
+  
 
   // Handle cursor-following ghost movement
   const handleMouseMove = (e) => {
@@ -51,62 +75,68 @@ function App() {
   }, [isGhostFree]);
 
   const isAvailableForHire = process.env.NODE_ENV === "production";
+  
 
   return (
     <motion.div
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
-      style={{ backgroundColor: "#000", color: "#fff", minHeight: "100vh", position: "relative", overflow: "hidden" }}
+      style={{
+        backgroundColor: "#000",
+        color: "#fff",
+        minHeight: "100vh",
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
       {/* Ghost Component */}
       <motion.img
-        src="/ghost.png"
-        alt="Ghost"
-        animate={{
-          x: ghostPosition.x - 40,
-          y: ghostPosition.y - 40,
-          rotate: isGhostFree ? [0, 360] : 0,
-        }}
-        transition={{
-          x: { type: "spring", stiffness: 80, damping: 10 },
-          y: { type: "spring", stiffness: 80, damping: 10 },
-          rotate: { duration: 2, ease: "linear", repeat: Infinity },
-        }}
-        style={{
-          position: "absolute",
-          width: "80px",
-          height: "80px",
-          pointerEvents: "none",
-          zIndex: 9999,
-        }}
-      />
+  src="/ghost.gif"
+  alt="Ghost"
+  className="ghost"
+  style={{
+    position: "absolute",
+    transform: `translate(${ghostPosition.x}px, ${ghostPosition.y}px)`,
+    width: "80px",
+    height: "80px",
+    pointerEvents: "none",
+    zIndex: 9999,
+  }}
+/>
+
+
 
       {/* Ghost Toggle Button */}
-      <div
-        style={{
-          position: "fixed",
-          bottom: "20px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          zIndex: 9999,
-        }}
-      >
-        <button
-          onClick={() => setIsGhostFree(!isGhostFree)}
-          style={{
-            background: isGhostFree ? "#fff" : "#000",
-            color: isGhostFree ? "#000" : "#fff",
-            padding: "10px 20px",
-            borderRadius: "5px",
-            border: `1px solid ${isGhostFree ? "#000" : "#fff"}`,
-            cursor: "pointer",
-            transition: "background 0.3s ease, color 0.3s ease",
-          }}
-        >
-          {isGhostFree ? "Catch the Ghost" : "Release the Ghost"}
-        </button>
-      </div>
+      {/* Ghost Toggle Button */}
+<div
+  style={{
+    position: "fixed",
+    bottom: "20px",
+    left: "50%",
+    transform: "translateX(-50%)",
+    zIndex: 9999,
+    opacity: 0.6, // Makes the button semi-transparent
+  }}
+>
+  <button
+    onClick={() => setIsGhostFree(!isGhostFree)}
+    className="ghost-toggle-button"
+    style={{
+      background: isGhostFree ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)", // Semi-transparent background
+      color: isGhostFree ? "#000" : "#fff",
+      padding: "10px 20px",
+      borderRadius: "5px",
+      border: `1px solid ${isGhostFree ? "#000" : "#fff"}`,
+      cursor: "pointer",
+      transition: "background 0.3s ease, color 0.3s ease",
+      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)", // Subtle shadow
+    }}
+  >
+    {isGhostFree ? "Catch the Ghost" : "Release the Ghost"}
+  </button>
+</div>
+
 
       <div className="container">
         {/* Banner Section */}
@@ -182,6 +212,97 @@ function App() {
     </motion.div>
   );
 }
+
+
+//<---Autoform-->
+
+function AutoForm() {
+  const [step, setStep] = useState(0); // 0: Welcome, 1: LinkedIn, 2: Schedule
+  const linkedInUrl = "https://www.linkedin.com/in/yourprofile"; // Replace with your LinkedIn
+
+  const handleScheduleClick = () => {
+    // Redirect to Calendly or display an embedded calendar
+    window.open("https://calendly.com/yourusername", "_blank");
+  };
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+        backgroundColor: "#fff",
+        borderRadius: "10px",
+        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        padding: "20px",
+        zIndex: 1000,
+        maxWidth: "300px",
+      }}
+    >
+      <button
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+        }}
+        onClick={() => setStep(0)} // Reset to welcome
+      >
+        ✖
+      </button>
+
+      {step === 0 && (
+        <div>
+          <h4>Hi there! 👋</h4>
+          <p>
+            Thanks for reaching out! You can connect with me via LinkedIn or
+            schedule a time to chat.
+          </p>
+          <button
+            className="btn btn-primary btn-sm w-100 mb-2"
+            onClick={() => window.open(linkedInUrl, "_blank")}
+          >
+            Connect on LinkedIn
+          </button>
+          <button
+            className="btn btn-secondary btn-sm w-100"
+            onClick={() => setStep(2)}
+          >
+            Schedule a Time
+          </button>
+        </div>
+      )}
+
+      {step === 2 && (
+        <div>
+          <h4>Schedule a Time 📅</h4>
+          <p>Select a time slot that works for you:</p>
+          {/* Embed Calendly */}
+          <iframe
+            src="https://calendly.com/yourusername" // Replace with your Calendly URL
+            style={{
+              width: "100%",
+              height: "400px",
+              border: "none",
+              borderRadius: "5px",
+            }}
+            title="Schedule a Time"
+          ></iframe>
+          <button
+            className="btn btn-danger btn-sm w-100 mt-2"
+            onClick={() => setStep(0)}
+          >
+            Back
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
 
 function MainProfile() {
   return (
@@ -421,4 +542,187 @@ function ContactForm() {
   );
 }
 
+function HelpButton() {
+  const [showForm, setShowForm] = useState(false);
+
+  const handleClick = () => {
+    setShowForm(true);
+  };
+
+  return (
+    <>
+      {/* Floating Button */}
+      {!showForm && (
+        <button
+          onClick={handleClick}
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            backgroundColor: "#007bff",
+            color: "#fff",
+            border: "none",
+            borderRadius: "50%",
+            width: "60px",
+            height: "60px",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+            cursor: "pointer",
+          }}
+        >
+          Hi!
+        </button>
+      )}
+
+      {/* Help Form Modal */}
+      {showForm && <HelpForm onClose={() => setShowForm(false)} />}
+    </>
+  );
+}
+
+function HelpForm({ onClose }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  
+    // Example: You can process the form data here, such as sending it to an API or email
+    console.log("Form Data Submitted:", formData);
+  
+    // Example: Display a confirmation message
+    alert(`Thank you, ${formData.name}. We'll contact you shortly!`);
+  
+    // Reset form fields
+    setFormData({
+      name: "",
+      phone: "",
+      email: "",
+      message: "",
+    });
+  
+    // Close the form
+    onClose();
+  };
+  
+  return (
+    <div
+      style={{
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+        backgroundColor: "#fff",
+        color: "#000",
+        borderRadius: "10px",
+        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)",
+        padding: "20px",
+        zIndex: 1000,
+      }}
+    >
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          background: "none",
+          border: "none",
+          fontSize: "16px",
+          cursor: "pointer",
+        }}
+      >
+        ✖
+      </button>
+  
+      {/* Form Title */}
+      <h4 style={{ marginBottom: "10px" }}>Hi, how can I help you?</h4>
+  
+      {/* Form */}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          style={{
+            width: "100%",
+            marginBottom: "10px",
+            padding: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+          }}
+        />
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Your Phone"
+          value={formData.phone}
+          onChange={handleChange}
+          required
+          style={{
+            width: "100%",
+            marginBottom: "10px",
+            padding: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+          }}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          style={{
+            width: "100%",
+            marginBottom: "10px",
+            padding: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+          }}
+        />
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          value={formData.message}
+          onChange={handleChange}
+          rows="3"
+          style={{
+            width: "100%",
+            marginBottom: "10px",
+            padding: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+          }}
+        />
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            backgroundColor: "#007bff",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
+            padding: "10px",
+            cursor: "pointer",
+          }}
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  );
+  
+}
 export default App;
