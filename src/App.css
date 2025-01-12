@@ -107,14 +107,14 @@ button:hover {
   background: rgba(255, 255, 255, 1); /* Fully opaque white */
   color: #000; /* Black text */
   transform: scale(1.05); /* Slight zoom effect */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+  box-shadow: 0 300px 10px rgba(23, 23, 23, 0.3); /* Stronger shadow */
 }
 
 /* Force the Tawk.to chat bubble to minimize */
 footer {
   position: relative;
   bottom: 0;
-  width: 100%;
+  width: 50%;
   background-color: #000;
   color: #fff;
 }
@@ -137,4 +137,36 @@ footer .d-flex div img:hover {
 
 .hobby-list p {
   margin-bottom: 15px; /* Adds spacing between items */
+}
+
+.fixed-bottom-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.fixed-bottom-button:hover {
+  background-color: #0056b3;
+  transform: translateX(-50%) scale(1.05);
+}
+body, html {
+  margin: 0;
+  padding: 0;
+}
+header {
+  margin-top: 0;
+}
+.container {
+  padding: 0;
+  margin: 0;
 }

@@ -23,41 +23,37 @@ function App() {
   // Handle random ghost movement
   useEffect(() => {
     let animationFrameId;
-    let velocity = { x: .5, y: .5 }; // Adjust velocity for smooth speed
-  
+    let velocity = { x: 0.5, y: 0.5 };
+
     const moveGhost = () => {
       setGhostPosition((prevPosition) => {
         let newX = prevPosition.x + velocity.x;
         let newY = prevPosition.y + velocity.y;
-  
-        // Reverse direction if hitting horizontal borders
+
         if (newX <= 0 || newX >= window.innerWidth - 100) {
           velocity.x = -velocity.x;
-          newX = Math.max(0, Math.min(newX, window.innerWidth - 100)); // Clamp to boundaries
+          newX = Math.max(0, Math.min(newX, window.innerWidth - 100));
         }
-  
-        // Reverse direction if hitting vertical borders
+
         if (newY <= 0 || newY >= window.innerHeight - 100) {
           velocity.y = -velocity.y;
-          newY = Math.max(0, Math.min(newY, window.innerHeight - 100)); // Clamp to boundaries
+          newY = Math.max(0, Math.min(newY, window.innerHeight - 100));
         }
-  
+
         return { x: newX, y: newY };
       });
-  
+
       animationFrameId = requestAnimationFrame(moveGhost);
     };
-  
+
     if (isGhostFree) {
       animationFrameId = requestAnimationFrame(moveGhost);
     } else {
       cancelAnimationFrame(animationFrameId);
     }
-  
+
     return () => cancelAnimationFrame(animationFrameId);
   }, [isGhostFree]);
-  
-  
 
   // Handle cursor-following ghost movement
   const handleMouseMove = (e) => {
@@ -76,7 +72,6 @@ function App() {
   }, [isGhostFree]);
 
   const isAvailableForHire = process.env.NODE_ENV === "production";
-  
 
   return (
     <motion.div
@@ -87,100 +82,100 @@ function App() {
         backgroundColor: "#000",
         color: "#fff",
         minHeight: "100vh",
-        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
         overflow: "hidden",
       }}
     >
       {/* Ghost Component */}
       <motion.img
-  src="/Pixel_Robot.gif"
-  alt="Ghost"
-  className="ghost"
-  style={{
-    position: "sticky",
-    transform: `translate(${ghostPosition.x}px, ${ghostPosition.y}px)`,
-    width: "80px",
-    height: "80px",
-    pointerEvents: "none",
-    zIndex: 9999,
-  }}
-/>
-
-
+        src="/Pixel_Robot.gif"
+        alt="Ghost"
+        className="ghost"
+        style={{
+          position: "fixed",
+          transform: `translate(${ghostPosition.x}px, ${ghostPosition.y}px)`,
+          width: "80px",
+          height: "80px",
+          pointerEvents: "none",
+          zIndex: 9999,
+        }}
+      />
 
       {/* Ghost Toggle Button */}
-<div
-  style={{
-    position: "fixed",
-    bottom: "20px",
-    left: "50%",
-    transform: "translateX(-50%)",
-    zIndex: 9999,
-    opacity: 0.6, // Makes the button semi-transparent
-  }}
->
-  <button
-    onClick={() => setIsGhostFree(!isGhostFree)}
-    className="ghost-toggle-button"
-    style={{
-      background: isGhostFree ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)", // Semi-transparent background
-      color: isGhostFree ? "#000" : "#fff",
-      padding: "10px 20px",
-      borderRadius: "5px",
-      border: `1px solid ${isGhostFree ? "#000" : "#fff"}`,
-      cursor: "pointer",
-      transition: "background 0.3s ease, color 0.3s ease",
-      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)", // Subtle shadow
-    }}
-  >
-    {isGhostFree ? "Call to the base" : "Patrol"}
-  </button>
-</div>
-      <div className="container">
+      <div
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 9999,
+        }}
+      >
+        <button
+          onClick={() => setIsGhostFree(!isGhostFree)}
+          style={{
+            background: isGhostFree ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)",
+            color: isGhostFree ? "#000" : "#fff",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            border: `1px solid ${isGhostFree ? "#000" : "#fff"}`,
+            cursor: "pointer",
+            transition: "background 0.3s ease, color 0.3s ease",
+          }}
+        >
+          {isGhostFree ? "Call to Base" : "Patrol"}
+        </button>
+      </div>
+
+      <div
+        className="container"
+        style={{
+          margin: "0 auto",
+          padding: "0",
+          maxWidth: "1200px",
+        }}
+      >
         {/* Banner Section */}
         <header
-          className="d-flex flex-column flex-md-row align-items-center justify-content-between text-white"
+          className="d-flex flex-column align-items-center text-white"
           style={{
-            backgroundImage: "linear-gradient(to right, #007bff,rgb(37, 22, 62))",
-            borderRadius: "50px",
-            marginBottom: "5px",
-            padding: "10px",
+            backgroundImage: "linear-gradient(to right, #007bff, rgb(37, 22, 62))",
+            borderRadius: "20px",
+            padding: "20px",
+            margin: "20px 0",
             boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
           }}
         >
-          <div style={{ flex: 1, textAlign: "center" }}>
-            <h1
-              className="fw-bold"
-              style={{
-                fontSize: "3rem",
-                background: "linear-gradient(to right, #00c6ff, #0072ff)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Welcome to My Portfolio
-            </h1>
-            <p style={{ fontSize: "1.2rem", marginTop: "10px" }}>
-              Hi, I'm <strong>Naveen</strong>, a <strong>CRM Product Engineer</strong> passionate about <strong>empowering businesses with tailored solutions</strong>.
-            </p>
-            
-            <div className="mt-4">
-              <a
-                href="/Naveen_Resume.pdf"
-                download="Naveen_Resume.pdf"
-                className="btn btn-light btn-lg"
-                style={{
-                  backgroundColor: "#007bff",
-                  color: "#fff",
-                  borderRadius: "5px",
-                  padding: "10px 20px",
-                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                }}
-              >
-                Download CV
-              </a>
-            </div>
-          </div>
+          <h1
+            className="fw-bold"
+            style={{
+              fontSize: "3rem",
+              background: "linear-gradient(to right, #00c6ff, #0072ff)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            Welcome to My Portfolio
+          </h1>
+          <p style={{ fontSize: "1.2rem" }}>
+            Hi, I'm <strong>Naveen</strong>, a <strong>CRM Product Engineer</strong> passionate about <strong>empowering businesses with tailored solutions</strong>.
+          </p>
+          <a
+            href="/Naveen_Resume.pdf"
+            download="Naveen_Resume.pdf"
+            className="btn btn-light btn-lg"
+            style={{
+              backgroundColor: "#007bff",
+              color: "#fff",
+              borderRadius: "5px",
+              padding: "10px 20px",
+              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+            }}
+          >
+            Download CV
+          </a>
         </header>
 
         {/* Main Content */}
@@ -442,7 +437,7 @@ function SecondaryProfile() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1, delay: 0.5 }}
     >
-      <h2>Other Profile</h2>
+      <h2>Other Me</h2>
       <img
         src="image (8).webp"
         alt="Naveen T - Secondary Profile"
@@ -457,7 +452,7 @@ function SecondaryProfile() {
 <div class="hobby-list">
   <p>📚 <strong>Diving into AI and Machine Learning:</strong> I love keeping up with the latest advancements in AI and understanding how it shapes the future.</p>
   <p>💻 <strong>Building SaaS Applications:</strong> Turning innovative ideas into functional, user-friendly software is my creative outlet.</p>
-  <p>☁️ <strong>Exploring Cloud Platforms:</strong> I enjoy experimenting with AWS and other cloud technologies to unlock their full potential.</p>
+  <p>☁️ <strong>Exploring Cloud Platforms:</strong> I enjoy experimenting with AWS and other salesforce clouds to unlock their full potential.</p>
   <p>📷 <strong>Photography and Travel:</strong> Capturing the world through my lens and discovering new places keeps me inspired.</p>
 </div>
 
