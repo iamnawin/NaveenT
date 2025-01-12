@@ -170,3 +170,13 @@ header {
   padding: 0;
   margin: 0;
 }
+
+@font-face {
+  font-family: 'CustomScript';
+  src: url('/fonts/custom-script.ttf') format('truetype'); /* Adjust path if necessary */
+}
+.cursive-name {
+  font-family: 'Montez', cursive;
+  font-size: 2.5rem; /* Adjust as needed */
+  color: #333; /* Adjust color as needed */
+}

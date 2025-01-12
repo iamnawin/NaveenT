@@ -77,7 +77,8 @@ function App() {
     <motion.div
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
+      transition={{ 
+        duration: 1 }}
       style={{
         backgroundColor: "#000",
         color: "#fff",
@@ -162,20 +163,25 @@ function App() {
           <p style={{ fontSize: "1.2rem" }}>
             Hi, I'm <strong>Naveen</strong>, a <strong>CRM Product Engineer</strong> passionate about <strong>empowering businesses with tailored solutions</strong>.
           </p>
-          <a
-            href="/Naveen_Resume.pdf"
-            download="Naveen_Resume.pdf"
-            className="btn btn-light btn-lg"
-            style={{
-              backgroundColor: "#007bff",
-              color: "#fff",
-              borderRadius: "5px",
-              padding: "10px 20px",
-              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-            }}
-          >
-            Download CV
-          </a>
+          <div className="mt-4"></div>
+          <div className="mt-4">
+  <a
+    href="/Naveen_Resume.pdf" // Ensure this path points to your resume file in the public folder
+    target="_blank"
+    rel="noopener noreferrer"
+    className="btn btn-light btn-lg"
+    style={{
+      backgroundColor: "#007bff",
+      color: "#fff",
+      borderRadius: "5px",
+      padding: "10px 20px",
+      boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+    }}
+  >
+    View Resume
+  </a>
+</div>
+
         </header>
 
         {/* Main Content */}
@@ -309,7 +315,8 @@ function MainProfile() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1, delay: 1 }}
     >
-      <h2>Naveen Tatikayala</h2>
+      <h2 className="cursive-name">Naveen Tatikayala</h2>
+
       <img
         src="/profile-pic.png"
        
@@ -437,7 +444,7 @@ function SecondaryProfile() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1, delay: 0.5 }}
     >
-      <h2>Other Me</h2>
+      <h2>Other Me - Navn</h2>
       <img
         src="image (8).webp"
         alt="Naveen T - Secondary Profile"
@@ -452,7 +459,7 @@ function SecondaryProfile() {
 <div class="hobby-list">
   <p>📚 <strong>Diving into AI and Machine Learning:</strong> I love keeping up with the latest advancements in AI and understanding how it shapes the future.</p>
   <p>💻 <strong>Building SaaS Applications:</strong> Turning innovative ideas into functional, user-friendly software is my creative outlet.</p>
-  <p>☁️ <strong>Exploring Cloud Platforms:</strong> I enjoy experimenting with AWS and other salesforce clouds to unlock their full potential.</p>
+  <p>☁️ <strong>Exploring Cloud Platforms:</strong> I enjoy experimenting with AWS and Salesforce clouds to unlock their full potential.</p>
   <p>📷 <strong>Photography and Travel:</strong> Capturing the world through my lens and discovering new places keeps me inspired.</p>
 </div>
 
@@ -482,9 +489,16 @@ function ContactForm() {
   };
 
   return (
-    <section
+    <motion.section
       className="mt-5 p-4 rounded"
-      style={{ backgroundColor: "#000", color: "#fff", border: "1px solid #fff" }}
+      style={{
+        backgroundColor: "#000",
+        color: "#fff",
+        border: "1px solid #fff",
+      }}
+      initial={{ y: "100vh", opacity: 0 }} // Start off-screen
+      animate={{ y: 0, opacity: 1 }} // Slide to final position
+      transition={{ type: "spring", stiffness: 100, duration: 1,  delay: 1.5}} // Animation settings
     >
       <h2 className="text-center mb-4">
         <FontAwesomeIcon icon={faPaperPlane} className="me-2" /> Contact Me
@@ -499,7 +513,11 @@ function ContactForm() {
             id="name"
             name="name"
             className="form-control"
-            style={{ backgroundColor: "#333", color: "#fff", border: "1px solid #555" }}
+            style={{
+              backgroundColor: "#333",
+              color: "#fff",
+              border: "1px solid #555",
+            }}
             placeholder="Your Name"
             required
           />
@@ -513,7 +531,11 @@ function ContactForm() {
             id="email"
             name="email"
             className="form-control"
-            style={{ backgroundColor: "#333", color: "#fff", border: "1px solid #555" }}
+            style={{
+              backgroundColor: "#333",
+              color: "#fff",
+              border: "1px solid #555",
+            }}
             placeholder="youremail@example.com"
             required
           />
@@ -526,7 +548,11 @@ function ContactForm() {
             id="message"
             name="message"
             className="form-control"
-            style={{ backgroundColor: "#333", color: "#fff", border: "1px solid #555" }}
+            style={{
+              backgroundColor: "#333",
+              color: "#fff",
+              border: "1px solid #555",
+            }}
             rows="4"
             placeholder="Enter your message"
             required
@@ -538,7 +564,7 @@ function ContactForm() {
           </button>
         </div>
       </form>
-    </section>
+    </motion.section>
   );
 }
 
