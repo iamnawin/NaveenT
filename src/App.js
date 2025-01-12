@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import emailjs from "emailjs-com";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
   faInstagram,
@@ -22,7 +23,7 @@ function App() {
   // Handle random ghost movement
   useEffect(() => {
     let animationFrameId;
-    let velocity = { x: 1.5, y: 1.2 }; // Adjust velocity for smooth speed
+    let velocity = { x: .5, y: .5 }; // Adjust velocity for smooth speed
   
     const moveGhost = () => {
       setGhostPosition((prevPosition) => {
@@ -92,11 +93,11 @@ function App() {
     >
       {/* Ghost Component */}
       <motion.img
-  src="/ghost.gif"
+  src="/Pixel_Robot.gif"
   alt="Ghost"
   className="ghost"
   style={{
-    position: "absolute",
+    position: "sticky",
     transform: `translate(${ghostPosition.x}px, ${ghostPosition.y}px)`,
     width: "80px",
     height: "80px",
@@ -107,7 +108,6 @@ function App() {
 
 
 
-      {/* Ghost Toggle Button */}
       {/* Ghost Toggle Button */}
 <div
   style={{
@@ -133,20 +133,18 @@ function App() {
       boxShadow: "0 4px 6px rgba(0, 0, 0, 0.2)", // Subtle shadow
     }}
   >
-    {isGhostFree ? "Catch the Ghost" : "Release the Ghost"}
+    {isGhostFree ? "Call to the base" : "Patrol"}
   </button>
 </div>
-
-
       <div className="container">
         {/* Banner Section */}
         <header
           className="d-flex flex-column flex-md-row align-items-center justify-content-between text-white"
           style={{
-            backgroundImage: "linear-gradient(to right, #007bff, #6610f2)",
-            borderRadius: "10px",
-            marginBottom: "20px",
-            padding: "30px",
+            backgroundImage: "linear-gradient(to right, #007bff,rgb(37, 22, 62))",
+            borderRadius: "50px",
+            marginBottom: "5px",
+            padding: "10px",
             boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
           }}
         >
@@ -163,8 +161,9 @@ function App() {
               Welcome to My Portfolio
             </h1>
             <p style={{ fontSize: "1.2rem", marginTop: "10px" }}>
-              Hi, I'm <strong>Naveen</strong>, a <strong>Salesforce Consultant</strong> passionate about <strong>empowering businesses with tailored solutions</strong>.
+              Hi, I'm <strong>Naveen</strong>, a <strong>CRM Product Engineer</strong> passionate about <strong>empowering businesses with tailored solutions</strong>.
             </p>
+            
             <div className="mt-4">
               <a
                 href="/Naveen_Resume.pdf"
@@ -178,7 +177,7 @@ function App() {
                   boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
                 }}
               >
-                Download Resume
+                Download CV
               </a>
             </div>
           </div>
@@ -204,10 +203,13 @@ function App() {
           {!showSecondaryProfile && <ContactForm />}
         </main>
 
+
         {/* Footer Section */}
-        <footer className="text-center bg-dark text-white py-3">
-          <p>© 2025 Naveen. All rights reserved.</p>
-        </footer>
+<footer className="text-center bg-dark text-white py-3">
+  <p>"Success is not just about reaching your goals but leaving a lasting impression. Let’s create something remarkable together!"</p>
+  <p>© Coded with ❤ by Navn..</p>
+</footer>
+
       </div>
     </motion.div>
   );
@@ -218,7 +220,7 @@ function App() {
 
 function AutoForm() {
   const [step, setStep] = useState(0); // 0: Welcome, 1: LinkedIn, 2: Schedule
-  const linkedInUrl = "https://www.linkedin.com/in/yourprofile"; // Replace with your LinkedIn
+  const linkedInUrl = "https://www.linkedin.com/in/naveen-tatikayala/"; // Replace with your LinkedIn
 
   const handleScheduleClick = () => {
     // Redirect to Calendly or display an embedded calendar
@@ -310,14 +312,15 @@ function MainProfile() {
       className="mb-5 text-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1, delay: 0.5 }}
+      transition={{ duration: 1, delay: 1 }}
     >
       <h2>Naveen Tatikayala</h2>
       <img
         src="/profile-pic.png"
+       
         alt="Naveen T"
         style={{
-          width: "150px",
+          width: "220px",
           borderRadius: "50%",
           marginBottom: "20px",
         }}
@@ -357,22 +360,25 @@ function MainProfile() {
         </a>
       </div>
       <p>
-        Hey there! 👋 I'm on a mission to simplify business success with Salesforce.
-        As a Salesforce Consultant, I dive deep into your needs, whether you're just starting or need a boost.
-        Let's make Salesforce work wonders for your business!
-      </p>
-      <p>
-        <strong>New to Salesforce?</strong><br />
-        No worries—I'm your guide to crafting solutions that fit your unique business. Let's make your projects a success!
-      </p>
-      <p>
-        <strong>Already using Salesforce?</strong><br />
-        Let me analyze your setup, understand your challenges, and propose tailor-made solutions to enhance your efficiency.
-      </p>
-      <p>
-        Ever heard of Sales, Service, or FSL? I'm the consultant who helps you navigate these tools to elevate your business.
-        Let's work together to maximize the power of Salesforce for you!
-      </p>
+      Hey there, world! 👋 I’m Naveen, a <strong>Product Engineer</strong> from the bustling city of Hyderabad, India.
+      I’m passionate about building CRM systems and designing efficient solutions for businesses. After taking a personal career break (we all need one sometimes, right?), 
+      I’m back with fresh energy, working on exciting personal projects and ready for new opportunities. 🚀
+  </p>
+  <p>
+  
+    In my Journey, I’ve built everything from seamless CRM solutions to backend architectures that hum with efficiency. <br />
+    My toolbox includes <strong>LWC, Apex, JavaScript, ReactJS, Node.js, AI Co-pilot</strong> and the magic dust of Automations and API Integrations. <br />
+    Whether it’s crafting a Salesforce flow or building a complete application, I’m all in. 💻
+  </p>
+  <p>
+    
+    When I’m not working, you’ll find me exploring the latest in AI, dreaming up system designs, or nerding out over business trends. 
+    And when I need a break? I’m outdoors, sipping on some mate, or cruising around on my ride. 🏞️
+  </p>
+  <p>
+    Thanks for stopping by! If you’ve made it this far, we should definitely connect.!!!
+  </p>
+
     </motion.section>
   );
 }
@@ -383,7 +389,7 @@ function Projects() {
       className="mb-4"
       initial={{ opacity: 0, x: -100 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 1, delay: 1 }}
+      transition={{ duration: 1, delay: 1.5 }}
     >
       <h2>Projects</h2>
       <ul>
@@ -438,25 +444,24 @@ function SecondaryProfile() {
     >
       <h2>Other Profile</h2>
       <img
-        src="/image.webp"
+        src="image (8).webp"
         alt="Naveen T - Secondary Profile"
         style={{
-          width: "150px",
+          width: "220px",
           borderRadius: "50%",
           marginBottom: "20px",
         }}
       />
-      <p>Welcome to my other side! I enjoy photography, reading, and solving challenging problems.</p>
-      <h2>Hobbies</h2>
-      <ul
-        className="list-unstyled text-start mx-auto"
-        style={{ maxWidth: "300px" }}
-      >
-        <li>📓 Reading about AI and Machine Learning</li>
-        <li>💻 Building SaaS Applications</li>
-        <li>☁️ Exploring cloud platforms like AWS</li>
-        <li>📷 Photography and traveling</li>
-      </ul>
+      <p>Welcome to my other side! When I’m not immersed in tech, I enjoy capturing moments, exploring new ideas, and tackling challenging problems.</p>
+<h2>Hobbies</h2>
+<div class="hobby-list">
+  <p>📚 <strong>Diving into AI and Machine Learning:</strong> I love keeping up with the latest advancements in AI and understanding how it shapes the future.</p>
+  <p>💻 <strong>Building SaaS Applications:</strong> Turning innovative ideas into functional, user-friendly software is my creative outlet.</p>
+  <p>☁️ <strong>Exploring Cloud Platforms:</strong> I enjoy experimenting with AWS and other cloud technologies to unlock their full potential.</p>
+  <p>📷 <strong>Photography and Travel:</strong> Capturing the world through my lens and discovering new places keeps me inspired.</p>
+</div>
+
+
     </motion.section>
   );
 }

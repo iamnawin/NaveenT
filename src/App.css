@@ -110,3 +110,31 @@ button:hover {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Stronger shadow */
 }
 
+/* Force the Tawk.to chat bubble to minimize */
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+}
+
+footer .d-flex div img {
+  transition: transform 0.3s ease;
+}
+
+footer .d-flex div img:hover {
+  transform: scale(1.2);
+}
+
+.hobby-list {
+  max-width: 300px; /* Ensures the content stays centered */
+  margin: 0 auto; /* Centers the text on the page */
+  text-align: left; /* Aligns all text to the left */
+  font-size: 1rem; /* Sets a readable font size */
+  line-height: 1.8; /* Increases line spacing for better readability */
+}
+
+.hobby-list p {
+  margin-bottom: 15px; /* Adds spacing between items */
+}
