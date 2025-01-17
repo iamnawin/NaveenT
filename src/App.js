@@ -9,6 +9,7 @@ import {
   faInstagram,
   faLinkedin,
   faGithub,
+  faSalesforce
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
@@ -352,6 +353,17 @@ function MainProfile() {
         >
           <FontAwesomeIcon icon={faGithub} size="2x" />
         </a>
+
+        <a
+          href="https://www.salesforce.com/trailblazer/naveentatikayalaqe1ru2dr32xb"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white mx-2"
+        >
+          <FontAwesomeIcon icon={faSalesforce} size="2x" />
+        </a>
+
+        
         <a
           href="mailto:naveen_crm@outlook.com"
           target="_blank"
@@ -360,6 +372,7 @@ function MainProfile() {
         >
           <FontAwesomeIcon icon={faEnvelope} size="2x" />
         </a>
+        
       </div>
       <p>
       Hey there, world! 👋 I’m Naveen, a <strong>Product Engineer</strong> from the bustling city of Hyderabad, India.
