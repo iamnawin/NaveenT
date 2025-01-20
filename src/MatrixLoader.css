@@ -1,0 +1,37 @@
+/* MatrixLoader.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: black;
+    color: white;
+    font-family: monospace;
+    overflow: hidden;
+  }
+  
+  /* Matrix loader container */
+  #matrix-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: black;
+  }
+  
+  .matrix-numbers {
+    font-size: 2rem;
+    color: #00ff00;
+    text-align: center;
+    animation: fadeOut 3s linear forwards;
+  }
+  
+  /* Animation to fade out the loader */
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  

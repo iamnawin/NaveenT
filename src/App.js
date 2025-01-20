@@ -4,14 +4,18 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import emailjs from "emailjs-com";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+//import MatrixLoader from "./MatrixLoader";
+//import "./App.css";
 import {
   faInstagram,
   faLinkedin,
   faGithub,
-  faSalesforce
+  faSalesforce,
+  faFacebook,
+  faFlickr
+  
 } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faPaperPlane, faX } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [showSecondaryProfile, setShowSecondaryProfile] = useState(false);
@@ -20,6 +24,11 @@ function App() {
     x: window.innerWidth / 2,
     y: window.innerHeight / 2,
   });
+
+
+
+ 
+
 
   // Handle random ghost movement
   useEffect(() => {
@@ -329,14 +338,7 @@ function MainProfile() {
         }}
       />
       <div className="d-flex justify-content-center mb-4">
-        <a
-          href="https://www.instagram.com/navn_t"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white mx-2"
-        >
-          <FontAwesomeIcon icon={faInstagram} size="2x" />
-        </a>
+        
         <a
           href="https://www.linkedin.com/in/naveen-tatikayala/"
           target="_blank"
@@ -374,25 +376,28 @@ function MainProfile() {
         </a>
         
       </div>
-      <p>
-      Hey there, world! 👋 I’m Naveen, a <strong>Product Engineer</strong> from the bustling city of Hyderabad, India.
-      I’m passionate about building CRM systems and designing efficient solutions for businesses. After taking a personal career break (we all need one sometimes, right?), 
-      I’m back with fresh energy, working on exciting personal projects and ready for new opportunities. 🚀
+      
+<p>
+      Hey there, world! 👋 I’m Naveen, a <strong>Product Engineer & Aspiring Product Manager</strong> from the bustling city of Hyderabad, India. 
+      I’m passionate about building CRM systems, leading product strategies, and designing efficient solutions for businesses. 
+      After taking a personal career break (we all need one sometimes, right?), I’m back with fresh energy, working on exciting personal projects and ready for new opportunities. 🚀
   </p>
-  <p>
-  
-    In my Journey, I’ve built everything from seamless CRM solutions to backend architectures that hum with efficiency. <br />
-    My toolbox includes <strong>LWC, Apex, JavaScript, ReactJS, Node.js, AI Co-pilot</strong> and the magic dust of Automations and API Integrations. <br />
-    Whether it’s crafting a Salesforce flow or building a complete application, I’m all in. 💻
+
+<p>
+    In my journey, I’ve built everything from seamless CRM solutions to backend architectures that hum with efficiency. <br />
+    My toolbox includes <strong>LWC, Apex, JavaScript, ReactJS, Node.js, AI Co-pilot</strong>, and the magic dust of automations, API integrations, and product roadmaps. <br />
+    Whether it’s crafting a Salesforce flow, defining user stories, or building a complete application, I’m all in. 💻
   </p>
-  <p>
-    
+
+<p>
     When I’m not working, you’ll find me exploring the latest in AI, dreaming up system designs, or nerding out over business trends. 
     And when I need a break? I’m outdoors, sipping on some mate, or cruising around on my ride. 🏞️
   </p>
-  <p>
+
+<p>
     Thanks for stopping by! If you’ve made it this far, we should definitely connect.!!!
   </p>
+
 
     </motion.section>
   );
@@ -467,14 +472,60 @@ function SecondaryProfile() {
           marginBottom: "20px",
         }}
       />
-      <p>Welcome to my other side! When I’m not immersed in tech, I enjoy capturing moments, exploring new ideas, and tackling challenging problems.</p>
+
+<div className="d-flex justify-content-center mb-4">
+        <a
+          href="https://www.instagram.com/navn_t"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white mx-2"
+        >
+          <FontAwesomeIcon icon={faInstagram} size="2x" />
+        </a>
+        <a
+          href="https://www.facebook.com/iamnavn"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white mx-2"
+        >
+          <FontAwesomeIcon icon={faFacebook} size="2x" />
+        </a>
+        <a
+          href="https://www.threads.net/@navn_t"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white mx-2"
+        >
+          <FontAwesomeIcon icon={faX} size="2x" />
+        </a>
+
+        <a
+          href="https://www.flickr.com/photos/154354634@N03/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white mx-2"
+        >
+          <FontAwesomeIcon icon={faFlickr} size="2x" />
+        </a>
+        </div>
+        <p>Welcome to my other side! When I’m not immersed in tech, I’m diving into my passions, chasing creativity, and exploring new ways to see and experience the world. 
+Life is a mix of challenges, ideas, and inspirations, and I believe in making the most of every moment both in and outside the digital world. 
+From crafting elegant solutions at my desk to capturing raw, beautiful moments in the streets, I enjoy living at the intersection of technology and creativity. 
+Every day is an opportunity to learn, explore, and connect with what sparks joy. 🚀</p>
 <h2>Hobbies</h2>
-<div class="hobby-list">
-  <p>📚 <strong>Diving into AI and Machine Learning:</strong> I love keeping up with the latest advancements in AI and understanding how it shapes the future.</p>
-  <p>💻 <strong>Building SaaS Applications:</strong> Turning innovative ideas into functional, user-friendly software is my creative outlet.</p>
-  <p>☁️ <strong>Exploring Cloud Platforms:</strong> I enjoy experimenting with AWS and Salesforce clouds to unlock their full potential.</p>
-  <p>📷 <strong>Photography and Travel:</strong> Capturing the world through my lens and discovering new places keeps me inspired.</p>
+<div class="hobby-grid">
+  <div class="hobby-item">📚 <strong>AI & Machine Learning:</strong> Staying ahead with the latest advancements in AI.</div>
+  <div class="hobby-item">💻 <strong>Building SaaS:</strong> Turning ideas into user-friendly software.</div>
+  <div class="hobby-item">📷 <strong>Street Photography:</strong> Capturing candid urban moments.</div>
+  <div class="hobby-item">✏️ <strong>Designing Logos:</strong> Blending creativity with strategy.</div>
+  <div class="hobby-item">⛰️ <strong>Trekking:</strong> Exploring trails and soaking in nature.</div>
+  <div class="hobby-item">✈️ <strong>Travel:</strong> Immersing in diverse cultures and cuisines.</div>
+  <div class="hobby-item">🎨 <strong>Sketching:</strong> Relaxing through imaginative doodles.</div>
+  <div class="hobby-item">🎮 <strong>Gaming:</strong> Embracing creative and strategic challenges.</div>
 </div>
+
+
+
 
 
     </motion.section>
